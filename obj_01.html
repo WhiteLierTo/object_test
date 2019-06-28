@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>工厂模式、构造函数、原型模式</title>
+	</head>
+	<body>
+		<div class="parent">
+			<div class="children">
+				
+			</div>
+		</div>
+		<style>
+		/*垂直水平居中*/
+			.parent{
+				text-align: center;
+				display: table-cell;
+				vertical-align: middle;
+			}
+			.children{
+				display: inline-block;
+				background: #f00;
+			}
+		</style>
+		<script>
+				//工厂模式
+				function createPerson(name, age, job) {
+					var o = new Object();
+					o.name = name;
+					o.age = age;
+					o.job = job;
+					o.setName = function() {
+						console.log(this.name);
+					}
+					return o;
+				}
+				var person = createPerson("lee", 25, 'doctor');
+				console.log('对象：' + JSON.stringify(person)); //对象：{"name":"lee","age":25,"job":"doctor"}
+				var CreatePerson = new createPerson("lee", 25, 'doctor');
+				CreatePerson.setName(); //lee
+				// console.log('李超')
+
+
+				//构造函数
+				function Person(name, age, job) {
+					this.name = name;
+					this.age = age;
+					this.job = job;
+					this.sayName = function() {
+						console.log(this.name);
+					}
+				}
+				var person2 = new Person("Math", 25, 'doctor');
+				person2.sayName(); //Math
+
+
+
+				//原型模式
+				function People() {}
+				People.prototype.name = 'lee';
+				People.prototype.age = 25;
+				People.prototype.job = 'doctor';
+				People.prototype.sayName = function() {
+					console.log('姓名：' + this.name);
+				}
+				var person2 = new People();
+				person2.sayName();
+		</script>
+	</body>
+</html>

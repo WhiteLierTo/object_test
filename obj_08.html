@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>猫继承动物-借用构造函数/原型继承</title>
+</head>
+<body>
+	<script>
+		/*
+		借用构造函数继承，可以传递参数
+		最主要的问题来自包含引用类型值的原型。想必大家还记得，我们前面介绍过包含引用类型值的原型属性会被所有实例共享；
+		 */
+		
+
+		/*function Aminal(age){
+			this.property = '我是动物';
+			this.age = age;
+			this.sleeping = function(){
+				console.log('我每天都要睡觉');
+			}
+		}
+
+		function Cat(){
+			// Aminal.apply(this,[5]);
+			Aminal.call(this,5);
+			this.name = '猫';
+			this.crying=function(){
+				console.log('我会喵喵叫');
+			}
+		}
+
+		var instance = new Cat();
+		instance.sleeping();
+		instance.crying();
+		console.log('我今年'+instance.age+"岁了");*/
+
+
+		/**
+		 * 原型链问题：最主要的问题来自包含引用类型值的原型。想必大家还记得，我们前面介绍过包含引用类型值的原型属性会被所有实例共享；
+		 */
+
+		/*function Aminal(){
+			this.property = '我是动物';
+			this.age = 5;
+		}
+
+		Aminal.prototype.sleeping = function(){
+			console.log('我每天都要睡觉');
+		}
+
+		function Cat(){
+			this.name='猫';
+		}
+
+		Cat.prototype = new Aminal();
+
+		Cat.prototype.crying=function(){
+			console.log('我会喵喵叫');
+		}
+
+		var instance = new Cat();
+
+		instance.sleeping();
+
+		instance.crying();*/
+
+
+		/**
+		 * 组合继承
+		 */
+		/*function Animal(name){
+			this.name = name;
+			this.age = 5;
+		}
+
+		Animal.prototype.sleeping = function(){
+			console.log('我每天都要睡觉');
+		};
+
+		function Cat (name,age){
+			Animal.call(this,name);
+			this.age = age;
+		}
+
+		//继承方法
+		Cat.prototype = new Animal();
+		Cat.prototype.constructor = Cat;
+		Cat.prototype.crying=function(){
+			console.log('我会喵喵叫');
+		}
+
+		var instance = new Cat('李超',25);
+
+		console.log(instance.name);
+		console.log(instance.age);
+		instance.sleeping();
+		instance.crying();*/
+
+
+		function createFunctions(){ 
+			 var result = new Array(); 
+			 for (var i=0; i < 10; i++){ 
+				 result[i] = function(num){ 
+					 return function(){ 
+					 return num; 
+			 		}; 
+		 		}(i);
+	 		} 
+	 		return result; 
+		}
+
+		console.log(createFunctions());
+
+	</script>
+</body>
+</html>
